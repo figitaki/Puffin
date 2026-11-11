@@ -1,0 +1,37 @@
+name: Firmware integration
+
+on:
+  push:
+    paths:
+      - .gitmodules
+      - puffin-firmware
+      - .github/workflows/firmware.yml
+  pull_request:
+    paths:
+      - .gitmodules
+      - puffin-firmware
+      - .github/workflows/firmware.yml
+
+permissions:
+  contents: read
+
+jobs:
+  pros3:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.platformio
+            puffin-firmware/.pio/libdeps
+          key: platformio-${{ runner.os }}-6.1.18-${{ hashFiles('puffin-firmware/platformio.ini') }}
+      - name: Install PlatformIO Core
+        run: python -m pip install platformio==6.1.18
+      - name: Build pinned ProS3 firmware
+        run: pio run --project-dir puffin-firmware --environment ProS3
