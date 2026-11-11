@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# No services or per-thread authentication are needed. Dependencies are restored
+# from the setup snapshot; keep wake-up free of installs and network requests.
+echo 'Puffin ready. Build firmware with: pio run --project-dir puffin-firmware'

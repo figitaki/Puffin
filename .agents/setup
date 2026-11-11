@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+cd -- "$repo_root"
+SECONDS=0
+
+echo "[setup ${SECONDS}s] Checking system tools"
+packages=()
+for package in build-essential ca-certificates git python3 kicad; do
+  if ! dpkg-query -W -f='${Status}' "$package" 2>/dev/null | grep -qx 'install ok installed'; then
+    packages+=("$package")
+  fi
+done
+if ((${#packages[@]})); then
+  sudo apt-get update -qq
+  sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends "${packages[@]}"
+fi
+
+# The checked-in designs use KiCad 8's file format; older CLIs cannot read them.
+kicad_version="$(kicad-cli version)"
+if (( ${kicad_version%%.*} < 8 )); then
+  echo "KiCad 8 or newer is required; this orb's apt sources provide $kicad_version" >&2
+  exit 1
+fi
+
+echo "[setup ${SECONDS}s] Installing PlatformIO Core"
+# uv and ~/.local/bin are provided by the Amp orb base image.
+uv tool install --python python3 'platformio==6.1.18'
+export PATH="$HOME/.local/bin:$PATH"
+pio --version
+
+echo "[setup ${SECONDS}s] Initializing pinned firmware submodule"
+git submodule update --init --recursive -- puffin-firmware
+
+echo "[setup ${SECONDS}s] Installing firmware platforms, compilers, and libraries"
+pio pkg install --project-dir "$repo_root/puffin-firmware" --environment ProS3 --environment esp32dev
+
+echo "[setup ${SECONDS}s] Ready: KiCad $kicad_version and both PlatformIO environments"
