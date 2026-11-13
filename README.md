@@ -21,7 +21,7 @@ Second, it serves as a powerful MIDI controller and sequencer that can communica
 
 - Kailh Choc v1 Switches with Hotswap Sockets
 - Per-Key RGB Backlighting with SK6812 LEDs
-- 2 x TRS Type-A MIDI Jacks (In and Out)
+- 2 x TRS MIDI Jacks (In and Out), Type A and Type B (Rev B)
 - 3000 mAh LIPO Battery
 - Bluetooth 5 and BLE 
 - Dual 32bit Xtensa LX7 cores
@@ -30,6 +30,13 @@ Second, it serves as a powerful MIDI controller and sequencer that can communica
 
 **The screen can be replaced with alternative I2C input/output modules such as knobs, sensors, or CV ports.*
 
+
+## TRS MIDI: Type A and Type B (Rev B)
+
+- **MIDI IN** accepts Type A and Type B senders automatically. A Schottky bridge in front of the 6N138 optocoupler handles either polarity.
+- **MIDI OUT** drives tip (IO39) and ring (IO42) through a 3.3 V buffer, following the MIDI 3.3 V spec. Firmware picks Type A (the default, and Rev A's wiring) or Type B. The output also works on battery.
+
+See [REVISION_NOTES.md](REVISION_NOTES.md) for the circuit details, the checks, and the firmware change it needs.
 
 ## PCB
 

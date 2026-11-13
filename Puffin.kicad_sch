@@ -1426,9 +1426,27 @@
 		(color 0 0 0 0)
 		(uuid "dbdbbbed-3f7b-4ff5-837f-092f263e7ef0")
 	)
-	(no_connect
-		(at 68.58 96.52)
-		(uuid "a0613756-2c27-41a2-9747-fef7f700c968")
+	(global_label "MIDI OUT TIP"
+		(shape output)
+		(at 68.58 96.52 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "912e6c37-c36b-4426-b098-5e32d57034e6")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 55 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
 	)
 	(no_connect
 		(at 68.58 101.6)
@@ -1442,9 +1460,27 @@
 		(at 68.58 99.06)
 		(uuid "b57e8b22-f4ac-41af-be8b-af0700951f12")
 	)
-	(no_connect
-		(at 68.58 104.14)
-		(uuid "b95fc1ce-c989-4a80-9206-2d2e3e2e0b7a")
+	(global_label "MIDI OUT RING"
+		(shape output)
+		(at 68.58 104.14 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "a462f35c-6c31-4e34-9a03-c0c9848dc31a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 55 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
 	)
 	(no_connect
 		(at 68.58 63.5)
@@ -2070,27 +2106,9 @@
 			)
 		)
 	)
-	(global_label "TX MIDI"
-		(shape input)
-		(at 68.58 88.9 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "57b90212-e974-4404-a302-accb3448f33c")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 58.5191 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
+	(no_connect
+		(at 68.58 88.9)
+		(uuid "a142b34b-fac7-4875-889d-0a7f979f46dd")
 	)
 	(global_label "LED DATA"
 		(shape input)
